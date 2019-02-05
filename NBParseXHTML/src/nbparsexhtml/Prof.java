@@ -22,6 +22,9 @@ public class Prof {
         this.giorni = giorni;
         this.ore=ore;
     }
+    public Prof(String mat){
+        materia=mat;
+    }
 
     public String getNome() {
         return nome;

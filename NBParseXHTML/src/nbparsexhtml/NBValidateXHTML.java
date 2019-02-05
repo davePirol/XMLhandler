@@ -25,10 +25,10 @@ public class NBValidateXHTML {
      * @param args the command line arguments
      */
     public static void main(String[] args)  {
-        List libri = null;
+        List corsi = null;
         Parser dom = new Parser();
         try {
-            libri = dom.parseDocument(args[0]);
+            corsi = dom.parseDocument("sportello.xml");
         } catch (ParserConfigurationException ex) {
             Logger.getLogger(NBValidateXHTML.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SAXException ex) {
@@ -38,8 +38,8 @@ public class NBValidateXHTML {
         }
 
         // iterazione della lista e visualizzazione degli oggetti
-        System.out.println("Numero di libri: " + libri.size());
-        Iterator iterator = libri.iterator();
+        System.out.println("Numero dei corsi: " + corsi.size());
+        Iterator iterator = corsi.iterator();
         while (iterator.hasNext()) {
             System.out.println(iterator.next().toString());
         }

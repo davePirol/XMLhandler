@@ -29,8 +29,9 @@ public class Parser {
         root = document.getDocumentElement();
         // generazione della lista degli elementi "libro"
         nodelist = root.getElementsByTagName("tr");
+        System.out.println(nodelist.item(0));
         if (nodelist != null && nodelist.getLength() > 0) {
-            while (...){
+            
             for (int i = 0; i < nodelist.getLength(); i += 2) {
                     element = (Element) nodelist.item(i);
                     element2 = (Element) nodelist.item(i + 2);
@@ -39,9 +40,8 @@ public class Parser {
                         corsi.add(p);
                     }
                 }
-            }
         }
-        return libri;
+        return corsi;
     }
 
     private Link getLink(Element element) {
@@ -63,28 +63,28 @@ public class Parser {
         // cerco il primo elemento nel primo tr
         Element elementParent = (Element) el.getParentNode().getParentNode();
         String materia = getTextValue(elementParent, "td", 0);
-        String nome = getTextValue(elementParent, "td", 1);
+        /*String nome = getTextValue(elementParent, "td", 1);
         String giorno = getTextValue(elementParent, "td", 2);
-        String ora = getTextValue(elementParent, "td", 3);
+        String ora = getTextValue(elementParent, "td", 3);*/
 
         //cerco le info del decondo tr
         Element elementParent2 = (Element) el2.getParentNode().getParentNode();
         String materia2 = getTextValue(elementParent2, "td", 0);
-        String mail = getTextValue(elementParent2, "td", 1);
+        /*String mail = getTextValue(elementParent2, "td", 1);
         String giorno2 = getTextValue(elementParent2, "td", 2);
-        String ora2 = getTextValue(elementParent2, "td", 3);
+        String ora2 = getTextValue(elementParent2, "td", 3);*/
 
         //sistemo i dati del professore
-        ArrayList giorni = new ArrayList();
+        /*ArrayList giorni = new ArrayList();
         ArrayList ore = new ArrayList();
         giorni.add(giorno);
         giorni.add(giorno2);
         ore.add(ora);
-        ore.add(ora2);
+        ore.add(ora2);*/
         materia += " " + materia2;
 
         //creo l'oggetto del prof
-        p = new Prof(materia, nome, mail, giorni, ore);
+        p = new Prof(materia);
         return p;
     }
 
