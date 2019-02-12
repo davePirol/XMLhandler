@@ -9,7 +9,7 @@ import org.xml.sax.SAXException;
 
 public class Parser {
 
-    private List corsi;
+    private List corsi,consigli;
 
     public Parser() {
         corsi = new ArrayList();
@@ -57,6 +57,24 @@ public class Parser {
         }
         return corsi;
     }
+    
+    public List parseConsiglio(String filename) throws ParserConfigurationException, SAXException, IOException {
+        DocumentBuilderFactory factory;
+        DocumentBuilder builder;
+        Document document;
+        Element root, element, element2;
+        NodeList nodelist;
+        Consigli c;
+        // creazione dell’albero DOM dal documento XML
+        factory = DocumentBuilderFactory.newInstance();
+        builder = factory.newDocumentBuilder();
+        document = builder.parse(filename);
+        root = document.getDocumentElement();
+        nodelist = root.getElementsByTagName("tr");
+        
+        
+        return consigli;
+    }
 
     private Link getLink(Element element) {
         Link libro = null;
@@ -100,6 +118,37 @@ public class Parser {
         //creo l'oggetto del prof
         p = new Prof(materia,nome,mail,giorni,ore);
         return p;
+    }
+    
+    public Consigli getConsigli(NodeList list){
+        Consigli c=null;
+        ArrayList classi=new ArrayList();
+        ArrayList aule=new ArrayList();
+        ArrayList oreDoc=new ArrayList();
+        ArrayList oreStud=new ArrayList();
+        
+        String lotto=list.item(0).getFirstChild().getTextContent();
+        String giorno=list.item(1).getChildNodes().item(1).getTextContent();
+        oreDoc.add(list.item(3).getChildNodes().item(0).getTextContent());
+        oreStud.add(list.item(3).getChildNodes().item(1).getTextContent());
+        classi.add(list.item(3).getChildNodes().item(2).getTextContent());
+        classi.add(list.item(3).getChildNodes().item(3).getTextContent());
+        oreDoc.add(list.item(4).getChildNodes().item(0).getTextContent());
+        oreStud.add(list.item(4).getChildNodes().item(1).getTextContent());
+        classi.add(list.item(4).getChildNodes().item(2).getTextContent());
+        classi.add(list.item(4).getChildNodes().item(3).getTextContent());
+        oreDoc.add(list.item(5).getChildNodes().item(0).getTextContent());
+        oreStud.add(list.item(5).getChildNodes().item(1).getTextContent());
+        classi.add(list.item(5).getChildNodes().item(2).getTextContent());
+        classi.add(list.item(5).getChildNodes().item(3).getTextContent());
+        String descrizione=list.item(6).getChildNodes().item(0).getTextContent();
+        aule.add(list.item(6).getChildNodes().item(2).getTextContent());
+        aule.add(list.item(6).getChildNodes().item(3).getTextContent());
+        aule.add(list.item(6).getChildNodes().item(4).getTextContent());
+        
+        c=new Consigli(giorno,oreDoc,oreStud,classi,aule,lotto,descrizione);
+        
+        return c;
     }
 
     // restituisce il valore testuale dell’elemento figlio specificato
